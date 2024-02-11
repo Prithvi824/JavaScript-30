@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manipulative variables</title>
+    <link
+      rel="icon"
+      href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/CSS_icon.svg/1200px-CSS_icon.svg.png"
+    />
+  </head>
+  <body>
+    <style>
+      :root {
+        --blur: 0px;
+        --radius: 10px;
+      }
+
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      body {
+        height: 100vh;
+        width: 100vw;
+        background: linear-gradient(to right, #fff7f1, #ffe4c9);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Helvetica, sans-serif;
+      }
+
+      main {
+        padding-top: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      img {
+        filter: blur(var(--blur));
+        border-radius: var(--radius);
+      }
+
+      .images {
+        gap: 4px;
+      }
+    </style>
+
+    <main>
+      <section style="padding-bottom: 25px">
+        <h1>Update CSS Properties in-real-time</h1>
+        <label for="blur">Blur</label>
+        <input
+          type="range"
+          name="blur"
+          min="0"
+          max="20"
+          value="5"
+          data-sizing="px"
+        />
+
+        <label for="border-radius">Border-radius</label>
+        <input
+          type="range"
+          name="radius"
+          min="0"
+          max="50"
+          value="5"
+          data-sizing="%"
+        />
+      </section>
+
+      <section class="images">
+        <img src="https://picsum.photos/300/300" alt="" />
+        <img src="https://picsum.photos/300/300" alt="" />
+        <img src="https://picsum.photos/300/300" alt="" />
+        <img src="https://picsum.photos/300/300" alt="" />
+      </section>
+    </main>
+
+    <script>
+      const inputs = document.querySelectorAll("input");
+
+      var handleChange = function () {
+        document.documentElement.style.setProperty(
+          `--${this.name}`,
+          `${this.value}` + `${this.dataset.sizing}`
+        );
+      };
+
+      inputs.forEach((input) => input.addEventListener("change", handleChange));
+      inputs.forEach((input) =>
+        input.addEventListener("mousemove", handleChange)
+      );
+    </script>
+  </body>
+</html>
