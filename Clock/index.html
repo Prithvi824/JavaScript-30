@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analog Clock</title>
+    <link rel="icon" href="favicon.png" />
+  </head>
+  <body>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      body {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(to right, #1c315e, 30%, #227c70);
+      }
+
+      main {
+        height: 300px;
+        width: 300px;
+        border-radius: 50%;
+        background-color: rgba(136, 164, 124, 0.5);
+        border: 2px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
+
+      .hour {
+        position: absolute;
+        width: 100px;
+        border: 2px solid rgba(230, 226, 195, 0.7);
+        border-radius: 2px;
+        transform: rotate(-90deg);
+        transform-origin: 0%;
+      }
+
+      .minute {
+        position: absolute;
+        width: 110px;
+        border: 2px solid rgba(230, 226, 195, 0.65);
+        border-radius: 2px;
+        transform: rotate(-90deg);
+        transform-origin: 0%;
+      }
+
+      .seconds {
+        position: absolute;
+        width: 120px;
+        border: 2px solid rgba(230, 226, 195, 0.6);
+        border-radius: 2px;
+        transform: rotate(-90deg);
+        transform-origin: 0%;
+      }
+    </style>
+    <main>
+      <div class="clock">
+        <div class="hour"></div>
+        <div class="minute"></div>
+        <div class="seconds"></div>
+      </div>
+    </main>
+    <script>
+      const seconds_hand = document.querySelector(".seconds");
+      const hour_hand = document.querySelector(".hour");
+      const minute_hand = document.querySelector(".minute");
+
+      const get_time = function () {
+        const time = new Date();
+        const second = (time.getSeconds() / 60) * 360 - 90;
+        const minute = (time.getMinutes() / 60) * 360 - 90;
+        const hour = (time.getHours() / 12) * 360 - 90;
+
+        seconds_hand.style.transform = `rotate(${second}deg)`;
+        minute_hand.style.transform = `rotate(${minute}deg)`;
+        hour_hand.style.transform = `rotate(${hour}deg)`;
+      };
+
+      setInterval(get_time, 1000);
+    </script>
+  </body>
+</html>
